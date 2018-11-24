@@ -1,9 +1,11 @@
 package Huffman;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.BitSet;
 
-public class Node {
+public class Node implements Serializable{
+    static final long serialVersionUID = 213543123;
     char ch;
     int freq;
     Node left, right;
@@ -23,17 +25,20 @@ public class Node {
     }
 
     public void printAll() {
-        printNode(this);
+        System.out.println("Total nodes in the tree: "+printNode(this));
+        
     }
     
 
-    private void printNode(Node node) {
+    private int printNode(Node node) {
         if(node == null)
-            return;
+            return 0;
 
         System.out.println(node);
-        printNode(node.left);
-        printNode(node.right);
+        int l = printNode(node.left);
+        int r = printNode(node.right);
+
+        return l+r+1;
     }
 
     public Node[] getLeaves() {
